@@ -1,17 +1,7 @@
 import time
 import syncedlyrics
 
-# Sample songs list (Artist - Title)
-SONGS_TO_TEST = [
-    "Daft Punk One More Time",
-    "Queen Bohemian Rhapsody",
-    "Coldplay Viva La Vida",
-    "Taylor Swift Anti-Hero",
-    "Imagine Dragons Believer",
-    "Mr Bruce I am disaster"
-]
-
-def fetch_synced_lyrics_with_timing(songs):
+def fetch(songs):
     print("=== Synced Lyrics Benchmark & PoC ===\n")
     
     total_start_time = time.perf_counter()
@@ -60,4 +50,4 @@ def fetch_synced_lyrics_with_timing(songs):
     return results
 
 if __name__ == "__main__":
-    fetch_synced_lyrics_with_timing(SONGS_TO_TEST)
+    pass

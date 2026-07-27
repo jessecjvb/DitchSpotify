@@ -3,88 +3,58 @@ from spotipy.oauth2 import SpotifyOAuth
 import os
 from dotenv import load_dotenv, find_dotenv
 
-# 1. Load the variables from .env into Python's environment
-load_dotenv(find_dotenv())
-
-print("Client ID found:", os.getenv("SPOTIPY_CLIENT_ID"))
-
-# 2. Request access to both listening history and private playlists
-SCOPES = "user-read-recently-played playlist-read-private"
-
-# 3. Initialize Spotipy (it will now automatically find the SPOTIPY_ variables we just loaded!)
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=SCOPES))
-
-# --- Test Fetching Recently Played Tracks ---
-print("--- Recently Played Tracks ---")
-recently_played = sp.current_user_recently_played(limit=20)
-for item in recently_played['items']:
-    track = item['track']
-    artist_name = track['artists'][0]['name']
-    print(f"{track['name']} by {artist_name}")
-
-# --- Test Fetching User Playlists ---
-print("\n--- User Playlists ---")
-playlists = sp.current_user_playlists()
-for playlist in playlists['items']:
-    print(f"{playlist['name']} ({playlist['items']['total']} tracks)")
+def get_recently_played_tracks(sp, limit=50):
+    """Fetch user's recently played track items."""
+    try:
+        recently_played = sp.current_user_recently_played(limit=limit)
+        return recently_played.get('items', [])
+    except Exception as e:
+        print(f"Error fetching recently played tracks: {e}")
+        return []
 
 
-if not playlists['items']:
-    print("No playlists found on this account.")
-else:
-    first_playlist = playlists['items'][10]
-    playlist_id = first_playlist['id']
-    playlist_name = first_playlist['name']
-
-    print(f"=== Songs in Playlist: '{playlist_name}' ===")
-
-    # 4. Fetch playlist items
-    results = sp.playlist_items(playlist_id)
-    items = results.get('items', [])
-
-    if not items:
-        print("This playlist appears to be empty or contains restricted media!")
-    else:
-        for index, item in enumerate(items, start=1):
-            # Safe extraction for tracks vs episodes vs local files
-            track = item.get('track') or item.get('item')
-            
-            if track:
-                track_name = track.get('name', 'Unknown Title')
-                
-                # Check for artists (tracks have artists, podcast episodes have show info)
-                if 'artists' in track and track['artists']:
-                    artists = ", ".join([a['name'] for a in track['artists']])
-                    print(f"{index}. {track_name} — {artists}")
-                else:
-                    print(f"{index}. {track_name}")
-            else:
-                print(f"{index}. [Unavailable track or local file]")
-
-# See liked songs
-SCOPES = "user-library-read"
-
-sp = spotipy.Spotify(
-    auth_manager=SpotifyOAuth(
-        scope=SCOPES,
-        show_dialog=True
-    )
-)
-
-print("=== Fetching Liked Songs ===")
-
-all_liked_tracks = []
-results = sp.current_user_saved_tracks(limit=50)
-
-while results:
-    for item in results['items']:
-        track = item['track']
-        all_liked_tracks.append(f"{track['name']} by {track['artists'][0]['name']}")
+def get_liked_tracks(sp, max_tracks=100):
+    """Fetch user's liked tracks up to a maximum limit."""
+    all_liked_tracks = []
+    limit = min(50, max_tracks)
     
-    # Check if there is another page of tracks
-    if results['next']:
-        results = sp.next(results)
-    else:
-        results = None
+    try:
+        results = sp.current_user_saved_tracks(limit=limit)
+        
+        while results and len(all_liked_tracks) < max_tracks:
+            for item in results.get('items', []):
+                track = item.get('track')
+                if track:
+                    artist_name = track['artists'][0]['name']
+                    track_name = track['name']
+                    all_liked_tracks.append(f"{artist_name} - {track_name}")
+                    
+                    if len(all_liked_tracks) >= max_tracks:
+                        break
 
-print(f"Successfully retrieved {len(all_liked_tracks)} total Liked Songs!")
+            # Fetch the next page if needed
+            if len(all_liked_tracks) < max_tracks and results.get('next'):
+                results = sp.next(results)
+            else:
+                results = None
+                
+    except Exception as e:
+        print(f"Error fetching liked tracks: {e}")
+        
+    return all_liked_tracks
+
+
+def fetch_all_user_tracks(sp, max_liked=100, recently_played_limit=50):
+    """
+    Main function to aggregate liked and recently played tracks.
+    Returns a combined list containing formatted liked track strings 
+    and recently played track item objects.
+    """
+    recently_played_items = get_recently_played_tracks(sp, limit=recently_played_limit)
+    liked_tracks = get_liked_tracks(sp, max_tracks=max_liked)
+
+    print(f"Retrieved {len(recently_played_items)} recently played tracks.")
+    print(f"Retrieved {len(liked_tracks)} liked tracks.")
+
+    all_tracks = liked_tracks + recently_played_items
+    return all_tracks
