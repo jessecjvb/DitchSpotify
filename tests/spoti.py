@@ -24,7 +24,7 @@ for item in recently_played['items']:
 
 # --- Test Fetching User Playlists ---
 print("\n--- User Playlists ---")
-playlists = sp.current_user_playlists(limit=20)
+playlists = sp.current_user_playlists()
 for playlist in playlists['items']:
     print(f"{playlist['name']} ({playlist['items']['total']} tracks)")
 
@@ -60,3 +60,31 @@ else:
                     print(f"{index}. {track_name}")
             else:
                 print(f"{index}. [Unavailable track or local file]")
+
+# See liked songs
+SCOPES = "user-library-read"
+
+sp = spotipy.Spotify(
+    auth_manager=SpotifyOAuth(
+        scope=SCOPES,
+        show_dialog=True
+    )
+)
+
+print("=== Fetching Liked Songs ===")
+
+all_liked_tracks = []
+results = sp.current_user_saved_tracks(limit=50)
+
+while results:
+    for item in results['items']:
+        track = item['track']
+        all_liked_tracks.append(f"{track['name']} by {track['artists'][0]['name']}")
+    
+    # Check if there is another page of tracks
+    if results['next']:
+        results = sp.next(results)
+    else:
+        results = None
+
+print(f"Successfully retrieved {len(all_liked_tracks)} total Liked Songs!")
