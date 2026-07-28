@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Top Navigation Bar (Same on all pages) -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='DitchSpotify.png') }}" alt="Logo Icon">
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="{{ url_for('home') }}">homepage btn</a>
+            <a href="{{ url_for('connect') }}">2nd page</a>
+        </nav>
+    </header>
+
+    <!-- Page Specific Content Injects Here -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

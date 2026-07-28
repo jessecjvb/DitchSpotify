@@ -1,0 +1,86 @@
+/* General Reset & Dark Purple Theme */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #3b224c; /* Dark purple background */
+    color: #f0e6f5; /* Soft light text for readable contrast */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    border-bottom: 1px solid #6a4480; /* Subtle line under navbar */
+    background-color: #331d42; /* Slightly darker purple for top bar */
+}
+
+.nav-brand img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #f0e6f5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #d8a8ff;
+}
+
+/* Content Container - Prevents text stretching on large desktops */
+.container {
+    max-width: 800px; /* Restricts width on large monitors */
+    margin: 3rem auto; /* Centers content with top/bottom breathing room */
+    padding: 0 1.5rem; /* Ensures distance from mobile/tablet borders */
+}
+
+/* Homepage Typography & Layout */
+.page-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.page-subscript {
+    font-size: 1.2rem;
+    color: #c49edf;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.content-body p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* Main Image Styling */
+.content-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border: 3px solid #1e1028;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    display: block;
+    background-color: #fff; /* Matches your white box mockup */
+}
