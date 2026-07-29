@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #230430; /* Dark purple background */
     color: #f0e6f5; /* Soft light text for readable contrast */
@@ -98,4 +102,76 @@ body {
     margin: 1.5rem 0;
     display: block;
     background-color: #fff; /* Matches your white box mockup */
+}
+
+/* --- Homepage Hero Overlay --- */
+.hero-container {
+    position: relative;
+    width: 100%; /* Ensures the container always touches the left/right edges */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%; /* Always touches the sides */
+    height: auto; /* Dynamically scales height so top/bottom are NEVER cropped */
+    display: block;
+    filter: brightness(0.5); /* Keeps overlay text readable */
+}
+
+/* We position the text content absolutely over the auto-resizing image */
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; /* Keeps text inside image boundaries on small screens */
+    z-index: 1;
+}
+
+.hero-title {
+    font-family: "Georgia", "Times New Roman", serif; /* Serif font */
+    color: #ffffff;
+    font-size: clamp(2rem, 5vw, 4rem); /* Scales nicely on smaller screens */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.hero-caption {
+    color: #f0e6f5;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    background-color: #6a4480; /* Purple button */
+    color: #ffffff;
+    padding: 0.8rem 1.8rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease; /* Enables the smooth transition for the hover effects */
+}
+
+.hero-btn:hover {
+    transform: scale(1.05); /* Increases size slightly */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* White glow */
+    color: #ffffff;
+}
+
+/* Adds breathing room above sections when scrolling down to them */
+.scroll-section {
+    padding-top: 3rem; 
+    margin-bottom: 5rem;
 }

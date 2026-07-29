@@ -2,24 +2,35 @@
 
 {% block title %}DitchSpotify{% endblock %}
 
+{% block hero %}
+<div class="hero-container">
+    <img src="{{ url_for('static', filename='DitchSpotifyCover.png') }}" alt="Main Image" class="hero-image">
+    
+    <div class="hero-content">
+        <h1 class="hero-title">This Is The First Row<br>This Is The Second Row<br>This Is The Third Row</h1>
+        <p class="hero-caption">This is the caption underneath the title.</p>
+        
+        <div class="hero-buttons">
+            <a href="#section-1" class="hero-btn">Section 1</a>
+            <a href="#section-2" class="hero-btn">Section 2</a>
+            <a href="{{ url_for('connect') }}" class="hero-btn">Connect</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
 {% block content %}
-    <h1 class="page-title">TITLE</h1>
-    <div class="page-subscript">subscript</div>
+<div class="content-body">
+    <!-- Anchor targets for the scroll buttons -->
+    <section id="section-1" class="scroll-section">
+        <h2>First Scroll Section</h2>
+        <p>When you click the first button, the page will smoothly scroll down to this exact spot.</p>
+    </section>
 
-    <div class="content-body">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-
-        <!-- Mockup Image -->
-        <img src="{{ url_for('static', filename='DitchSpotifyCover.png') }}" alt="Main Content Image" class="content-image">
-
-        <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-            culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+    <section id="section-2" class="scroll-section">
+        <h2>Second Scroll Section</h2>
+        <p>When you click the second button, the page will scroll down to here.</p>
+    </section>
+</div>
     </div>
 {% endblock %}
