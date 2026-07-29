@@ -26,15 +26,21 @@ def select_top_candidate_songs(all_tracks: list, client: genai.Client = None) ->
 
     # 3. Construct a prompt instructing the model to prefer internal memory
     prompt = f"""
-You are a music algorithm evaluating songs for anti-war messages and climate change warnings.
+FAST HEURISTIC SCAN:
+Scan the following song list and immediately pick UP TO 5 songs that have the most severe anti-war messages or urgent climate change warnings.
+
+Selection Weights:
+- 85%: The song's lyrics (based on your internal memory).
+- 10%: The literal meaning and tone of the song title.
+- 5%: The band or artist's historical reputation for political or environmental themes.
+
+CRITICAL SPEED RULES:
+- Do NOT deeply compare or analyze every song.
+- Do NOT search for unknown songs; ignore any track you do not instantly recognize.
+- Output ONLY the selected list matching the JSON schema immediately.
 
 Song List:
-{chr(10).join(str(track) for track in all_tracks)}
-
-Task:
-Select UP TO 5 songs from the list above that possess the heaviest, most explicit anti-war or climate change themes.
-These 5 songs will be sent to an external API to retrieve full lyrics for deeper evaluation.
-Do not provide reasoning. Return ONLY the list of selected song strings as required by the schema.
+{chr(10).join(all_tracks)}
 """
 
     print("Filtering top 5 lyric candidates...\n")
@@ -42,7 +48,7 @@ Do not provide reasoning. Return ONLY the list of selected song strings as requi
     try:
         # 4. Execute the request using gemini-3.5-flash
         response = client.models.generate_content(
-            model="gemini-3.5-flash",
+            model="gemini-3.1-flash-lite",
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
@@ -65,7 +71,7 @@ Do not provide reasoning. Return ONLY the list of selected song strings as requi
 
     except Exception as e:
         print(f"\nAn error occurred (no freeze!): {e}")
-        return []
+        raise Exception(e)
 
 class WinningSongAnalysis(BaseModel):
     winning_song: str = Field(
@@ -86,9 +92,9 @@ def select_best_song(results: list[dict], client: genai.Client = None) -> Winnin
     Takes a list of lyric lookup results, feeds them to Gemini, 
     and returns the song with the heaviest anti-war or climate warning message.
     """
-    # Initialize the client with a 30-second timeout if one wasn't passed in
+    # Initialize the client with a 60-second timeout if one wasn't passed in
     if client is None:
-        client = genai.Client(http_options=types.HttpOptions(timeout=30_000))
+        client = genai.Client(http_options=types.HttpOptions(timeout=60_000))
 
     # Step A: Format the dictionary list into a clean text block for the LLM
     formatted_context = ""
@@ -97,9 +103,7 @@ def select_best_song(results: list[dict], client: genai.Client = None) -> Winnin
         success = item.get("success", False)
         lrc = item.get("lrc_data", "")
 
-        formatted_context += f"\n========================================\n"
         formatted_context += f"CANDIDATE: {song_title}\n"
-        formatted_context += f"========================================\n"
         
         # If lyrics were found, feed them. If not, tell the AI to use its memory.
         if success and lrc:
@@ -123,7 +127,7 @@ def select_best_song(results: list[dict], client: genai.Client = None) -> Winnin
 
     # Step C: Call the model with structured output enabled
     response = client.models.generate_content(
-        model="gemini-3.5-flash",
+        model="gemini-3.1-flash-lite",
         contents=prompt,
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
