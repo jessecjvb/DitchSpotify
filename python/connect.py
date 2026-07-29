@@ -36,7 +36,6 @@ def run_spotify_ai(sp):
             "status": "success",
             "winning_song": winner.winning_song,
             "theme": winner.theme,
-            "key_quote": winner.key_quote,
             "explanation": winner.explanation
         }
 
