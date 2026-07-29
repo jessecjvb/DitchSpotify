@@ -26,6 +26,14 @@ a.text_link:visited {
   color: #53aa48;
 }
 
+.content-body p.lead-text {
+  font-size: 1.25rem; /* ~20px (adjust to 1.35rem or 22px if you want it even bigger) */
+  font-weight: 600;   /* Semi-bold (use 700 for full bold) */
+  line-height: 1.6;   /* Gives the text comfortable spacing */
+  color: #ffffff;     /* Set color to match your light text on dark background */
+  margin-bottom: 1.5rem;
+}
+
 /* Keeps in-site buttons explicitly white */
 .btn, 
 a.btn:link, 
