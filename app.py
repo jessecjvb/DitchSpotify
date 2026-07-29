@@ -8,6 +8,10 @@ from python.connect import run_spotify_ai # Import your updated function
 # import python.spoti
 # import python.ai
 
+SPOTIPY_CLIENT_ID = os.getenv('SPOTIPY_CLIENT_ID')
+SPOTIPY_CLIENT_SECRET = os.getenv('SPOTIPY_CLIENT_SECRET')
+SPOTIPY_REDIRECT_URI = os.getenv('SPOTIPY_REDIRECT_URI')
+
 app = Flask(__name__)
 
 # Set the secret key for session management
