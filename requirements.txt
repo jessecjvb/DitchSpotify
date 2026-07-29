@@ -4,5 +4,6 @@ python-dotenv
 requests
 spotipy
 google-genai
+syncedlyrics
 pydantic
 gunicorn
