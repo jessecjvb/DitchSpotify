@@ -135,15 +135,17 @@ body {
 .hero-title {
     font-family: "Georgia", "Times New Roman", serif; /* Serif font */
     color: #ffffff;
-    font-size: clamp(2rem, 5vw, 4rem); /* Scales nicely on smaller screens */
+    font-size: clamp(3rem, 5vw, 4rem); /* Scales nicely on smaller screens */
     line-height: 1.2;
+    text-decoration: underline;
     margin-bottom: 1rem;
 }
 
 .hero-caption {
-    color: #f0e6f5;
-    font-size: 1.3rem;
+    color: #ffffff;
+    font-size: 2.3rem;
     margin-bottom: 2rem;
+    line-height: 1.2;
 }
 
 .hero-buttons {
@@ -154,14 +156,20 @@ body {
 }
 
 .hero-btn {
-    background-color: #6a4480; /* Purple button */
+    background-color: #5a077d;
     color: #ffffff;
     padding: 0.8rem 1.8rem;
     font-size: 1.1rem;
     font-weight: bold;
     text-decoration: none;
     border-radius: 4px;
-    transition: all 0.3s ease; /* Enables the smooth transition for the hover effects */
+    transition: all 0.3s ease;
+    
+    /* Flexbox inside the button fixes vertical alignment when stretched */
+    display: inline-flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    text-align: center;      /* Keeps multi-line text centered */
 }
 
 .hero-btn:hover {
@@ -174,4 +182,37 @@ body {
 .scroll-section {
     padding-top: 3rem; 
     margin-bottom: 5rem;
+}
+
+/* Caption overlay wrapper - creates space from outer borders */
+.caption-image-box {
+    position: relative;
+    display: inline-block;
+    padding: 20px 40px;
+    margin: 1.5rem auto 2rem auto;
+}
+
+/* Secondary image - stroke */
+.stroke {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill; /* Fits the image exact to the text boundary */
+    z-index: 1;
+    transform: scale(1.05, 1.05);
+}
+
+/* Caption text - kept completely inside the image bounds */
+.hero-caption {
+    position: relative;
+    z-index: 2; /* Keeps text above the absolute image */
+    color: #ffffff;
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+    line-height: 1.3;
+    transform: translateY(-8px) rotate(-2deg);
 }

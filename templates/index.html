@@ -7,13 +7,17 @@
     <img src="{{ url_for('static', filename='DitchSpotifyCover.png') }}" alt="Main Image" class="hero-image">
     
     <div class="hero-content">
-        <h1 class="hero-title">This Is The First Row<br>This Is The Second Row<br>This Is The Third Row</h1>
-        <p class="hero-caption">This is the caption underneath the title.</p>
+        <h1 class="hero-title">De voorzitter van Spotify<br>investeert meer in wapens<br>dan in jouw favoriete artiest.</h1>
+
+        <div class="caption-image-box">
+            <img src="{{ url_for('static', filename='stroke.png') }}" alt="Stroke" class="stroke">
+            <p class="hero-caption">Jouw geld is meer waard.<br>Voor jezelf en anderen.<br>Wij stappen over. Dit is waarom.</p>
+        </div>
         
         <div class="hero-buttons">
-            <a href="#section-1" class="hero-btn">Section 1</a>
-            <a href="#section-2" class="hero-btn">Section 2</a>
-            <a href="{{ url_for('connect') }}" class="hero-btn">Connect</a>
+            <a href="#section-1" class="hero-btn">Ontdek het verhaal</a>
+            <a href="#section-2" class="hero-btn">Hoe we overstappen</a>
+            <a href="{{ url_for('connect') }}" class="hero-btn">Waarom jij moet overstappen,<br>volgens jouw muziek</a>
         </div>
     </div>
 </div>
