@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #3b224c; /* Dark purple background */
+    background-color: #230430; /* Dark purple background */
     color: #f0e6f5; /* Soft light text for readable contrast */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -18,14 +18,29 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
-    border-bottom: 1px solid #6a4480; /* Subtle line under navbar */
-    background-color: #331d42; /* Slightly darker purple for top bar */
+    border-bottom: 1px solid #45284e; /* Subtle line under navbar */
+    background-color: #1e0327; /* Slightly darker purple for top bar */
+}
+
+/* Updated Navbar Brand Link Styling */
+.nav-brand .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Space between logo and text */
+    text-decoration: none;
 }
 
 .nav-brand img {
     height: 40px;
     width: auto;
     display: block;
+}
+
+.brand-title {
+    color: #f0e6f5;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .nav-links {

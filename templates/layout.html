@@ -16,13 +16,14 @@
     <!-- Top Navigation Bar (Same on all pages) -->
     <header class="navbar">
         <div class="nav-brand">
-            <a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='DitchSpotify.png') }}" alt="Logo Icon">
+            <a href="{{ url_for('home') }}" class="brand-link">
+                <img src="{{ url_for('static', filename='DitchSpotify.png') }}" alt="DitchSpotify Icon">
+                <span class="brand-title">DitchSpotify</span>
             </a>
         </div>
         <nav class="nav-links">
-            <a href="{{ url_for('home') }}">homepage btn</a>
-            <a href="{{ url_for('connect') }}">2nd page</a>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('connect') }}">Your Recommendation</a>
         </nav>
     </header>
 
