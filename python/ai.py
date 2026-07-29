@@ -80,11 +80,8 @@ class WinningSongAnalysis(BaseModel):
     theme: str = Field(
         description="The primary theme: 'Anti-War' or 'Climate Change Warning'."
     )
-    key_quote: str = Field(
-        description="1 to 2 lines of lyrics from the song that highlight the severity of the message."
-    )
     explanation: str = Field(
-        description="A concise summary of why this song beat the other candidates in urgency and depth."
+        description="A concise summary written in Dutch explaining how the song addresses the chosen topic with strength and urgency, without referencing or comparing it to the other candidate songs."
     )
 
 def select_best_song(results: list[dict], client: genai.Client = None) -> WinningSongAnalysis:
@@ -122,7 +119,9 @@ def select_best_song(results: list[dict], client: genai.Client = None) -> Winnin
     Instructions:
     1. Base your decision primarily on the emotional urgency, lyric intensity, and specificity of the message.
     2. If a song's lyrics failed to load, you may evaluate it based on your internal knowledge of the track.
-    3. Return your final choice strictly adhering to the JSON schema provided.
+    3. In the 'explanation' field, describe why and how this specific song conveys its theme with such strength and urgency. Write this explanation in DUTCH.
+    4. Do NOT compare the winning song to the other candidate songs or mention the existence of other songs in the list (e.g., avoid phrases like "Unlike the other songs" or "This song beat the rest"). Focus strictly on the isolated merits of the selected song.
+    5. Return your final choice strictly adhering to the JSON schema provided.
     """
 
     # Step C: Call the model with structured output enabled
