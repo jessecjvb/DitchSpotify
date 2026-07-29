@@ -1,0 +1,16 @@
+{% macro quote_banner(image_filename, quote_text, author_name) %}
+<div class="quote-banner-container">
+    <!-- Background Image -->
+    <img src="{{ url_for('static', filename=image_filename) }}" alt="Banner background" class="quote-banner-bg">
+    
+    <!-- Content Overlay -->
+    <div class="quote-banner-content">
+        <blockquote class="quote-text">
+            “{{ quote_text }}”
+        </blockquote>
+        <div class="quote-author">
+            — {{ author_name }}
+        </div>
+    </div>
+</div>
+{% endmacro %}

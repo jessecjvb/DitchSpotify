@@ -3,6 +3,6 @@ Flask-Session
 python-dotenv
 requests
 spotipy
-google-gemini
+google-genai
 pydantic
 gunicorn
