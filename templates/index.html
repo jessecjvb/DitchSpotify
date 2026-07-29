@@ -5,7 +5,7 @@
 
 {% block hero %}
 <div class="hero-container">
-    <img src="{{ url_for('static', filename='DitchSpotifyCover.png') }}" alt="Main Image" class="hero-image">
+    <img src="{{ url_for('static', filename='DitchSpotifyCover2.png') }}" alt="Main Image" class="hero-image">
     
     <div class="hero-content">
         <h1 class="hero-title">De voorzitter van Spotify<br>investeert meer in wapens<br>dan in jouw favoriete artiest.</h1>
@@ -37,7 +37,7 @@
             <li><b>Ondertussen zijn artiesten ontevreden met de compensatie die ze van Spotify ontvangen.</b> Naar schatting <a class="text_link" href="https://royaltyexchange.com/blog/how-much-do-streaming-platforms-pay-per-stream">betaald</a> Spotify <b>$0.003 tot $0.005 per stream</b>. 
             Uit <a class="text_link" href="https://www.theguardian.com/music/2025/mar/12/spotify-is-trumpeting-big-paydays-for-artists-but-only-a-tiny-fraction-of-them-are-actually-thriving-loud-and-clear-report">officiële cijfers van Spotify</a> blijkt dat slechts 0.6% van de artiesten op het platform meer dan $1 miljoen verdienen, en 4.4% meer dan $131,000.
             <b>Echter gaat dit niet direct naar de artiest,</b> maar via de platenmaatschappijen waar de artiesten bij zijn aangesloten. Hierdoor kan daar maar weinig van over blijven wanneer het gedeeld moet worden met platenmaatschappijen, producers, en/of een meerkoppige band. 
-            <ul>
+            <ul class="nested-list">
                 <li>Snoop Dogg <a class="text_link" href="https://www.therichest.com/snoop-dogg-slams-spotify-over-45k-payout-for-1-billion-streams/">claimt</a> slechts $45,000 dollar verdiend te hebben aan een miljard streams.</li>
                 <li>Dani Filth, frontman van death metal band Cradle of Filth, heeft hier last van; Hij <a class="text_link" href="https://www.digitalmusicnews.com/2023/06/21/how-much-does-spotify-pay-for-1-million-streams-2023/">zegt</a> aan 25 miljoen streams slechts 20 pond verdiend te hebben. </li>
             </ul>
@@ -71,7 +71,7 @@
         {{ quote_banner(
             image_filename='artists/kglw2.jpg',
             quote_text='Can we put pressure on these\nDr. Evil tech bros to do better?',
-            author_name='King Gizard & The Lizard Wizard'
+            author_name='King Gizzard & The Lizard Wizard'
         ) }}
     <br>
         <p>Enkele van deze redenen zorgden ervoor dat meerdere artiesten en bands hun repertoire van Spotify hebben laten verwijderen. O.a. King Gizzard & The Lizard Wizard, Godspeed You! Black Emperor, Deerhoof en Xiu Xiu vallen hieronder. Ook Neil Young, Joni Mitchell en zelfs Taylor Swift hebben dit al een keer eerder gedaan, hoewel hun muziek weer te beluisteren is op het platform. De reden hiervoor is simpel: Spotify is tegenwoordig het hart van de muziekindustrie. Ook Merel Pauw (bekend als Elmer), Yousef Gnaoui (bekend als Sef) en Abel van Gijlswijk (Hang Youth) <a class="text_link" href="https://www.volkskrant.nl/cultuur-media/artiesten-willen-weg-bij-het-omstreden-spotify-maar-zitten-klem-spotify-is-in-z-n-eentje-de-gatekeeper-dat-lijkt-me-ongezond~be219ffe/">zeggen</a> graag van Spotify af te willen gaan, maar bekennen dat het als Nederlandse artiest onhaalbaar is om dat te doen. En toch zijn er alternatieven.</p>
@@ -85,8 +85,82 @@
 
     <section id="section-2" class="scroll-section">
         <h2>De Alternatieven</h2>
-        <p>Hier wordt gekeken naar hoe Apple Music, Tidal, Deezer(?) het opbokst tegen Spotify op uitbetaling, abonnementkosten, prijsstijgingen, muziekkwaliteit, onnodige (AI) features zoals podcasts. Spoiler alert: bijna allemaal beter. + Het is heel makkelijk om over te stappen met een overstapservice die je playlists over zet.</p>
+        <p>Gelukkig is Spotify niet de enige streamingdienst op de markt. Er zijn vele meer, die vaak voordelen hebben boven Spotify. Zo heeft Apple Music een goedkopere abonnementsprijs en betaald Qobuz hoog uit aan muzikanten. Tidal zit hier tussenin. Alle drie hebben ze vergelijkbare audiokwaliteit als Spotify: lossless, waarbij niks van de kwaliteit van het originele bestand verloren gaat. Hieronder worden enkele verschillen uitgelicht.</p>
+
+        <p>Ben je bang dat je al je playlists verloren gaan? Geen zorgen! Services als <a class="text_link" href="soundiiz.com">Soundiiz</a> zetten gemakkelijk al je playlists om naar een andere streamingdienst!</p>
+
+        <div class="table-wrapper">
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th class="feature-col"></th>
+        <!-- Swap text inside .platform-cell with <img> tags whenever you're ready -->
+        <th class="platform-header">
+          <div class="platform-cell">
+            <span class="platform-name">Spotify</span>
+            <!-- <img src="/static/images/spotify-logo.svg" alt="Spotify" class="platform-logo"> -->
+          </div>
+        </th>
+        <th class="platform-header">
+          <div class="platform-cell">
+            <span class="platform-name">Tidal</span>
+            <!-- <img src="/static/images/tidal-logo.svg" alt="Tidal" class="platform-logo"> -->
+          </div>
+        </th>
+        <th class="platform-header">
+          <div class="platform-cell">
+            <span class="platform-name">Apple Music</span>
+            <!-- <img src="/static/images/apple-music-logo.svg" alt="Apple Music" class="platform-logo"> -->
+          </div>
+        </th>
+        <th class="platform-header">
+          <div class="platform-cell">
+            <span class="platform-name">Qobuz</span>
+            <!-- <img src="/static/images/qobuz-logo.svg" alt="Qobuz" class="platform-logo"> -->
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="feature-name">Royalties per stream</td>
+        <td class="highlight-val">$0.003 – $0.005</td>
+        <td class="highlight-val">$0.013 – $0.015</td>
+        <td class="highlight-val">$0.007 – $0.010</td>
+        <td class="highlight-val">$0.015 – $0.019</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Kosten</td>
+        <td>€12.99</td>
+        <td>€12.99</td>
+        <td>€11.99</td>
+        <td>€13.50</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Price Hikes (3 Yrs)</td>
+        <td>3</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td class="feature-name">AI Muziek Policy</td>
+        <td><span class="badge badge-alert">Yes</span></td>
+        <td><span class="badge badge-positive">Toggle to hide</span></td>
+        <td><span class="badge badge-neutral">Tagged</span></td>
+        <td><span class="badge badge-positive">Tagged, Human first</span></td>
+      </tr>
+      <tr>
+        <td class="feature-name">Podcasts</td>
+        <td><span class="badge badge-alert">Yes</span></td>
+        <td><span class="badge badge-positive">No</span></td>
+        <td><span class="badge badge-positive">No</span></td>
+        <td><span class="badge badge-positive">No</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
     </section>
 </div>
-    </div>
+</div>
 {% endblock %}
