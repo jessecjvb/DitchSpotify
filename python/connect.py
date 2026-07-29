@@ -77,7 +77,7 @@ def main():
         # Access the clean data directly through Python attributes
         print(f"Je hebt recentelijk geluisterd naar {winner.winning_song}.")
         # print(f"📌 THEME: {winner.theme}")
-        print(f"📖 WHY IT WON:\n{winner.explanation}")
+        print(f"{winner.explanation}")
         if winner.theme.lower() == "anti-war":
             print(f"De betekenis van dit nummer staat haaks op de investeringen van Spotify's voorzitter")
         elif winner.theme.lower() == "climate change warning":
