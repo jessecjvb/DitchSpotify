@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}DitchSpotify - Thinking...{% endblock %}
+
+{% block content %}
+<!-- Automatically redirects after 1 second to trigger the AI processing -->
+<meta http-equiv="refresh" content="1;url={{ url_for('thinking', run='true') }}">
+
+<div class="content-body" style="text-align: center; margin-top: 4rem;">
+    <h1 class="page-title">AI is thinking...</h1>
+    <div class="page-subscript">Please wait while the AI analyzes your lyrics and determines the winner.</div>
+</div>
+{% endblock %}

@@ -9,14 +9,15 @@ import time
 import syncedlyrics
 from dotenv import load_dotenv, find_dotenv
 
-import lyrics
-import spoti
-import ai
+from python import spoti
+from python import ai
+from python import lyrics
 
 def run_spotify_ai(sp):
     """
     Takes an authenticated spotipy.Spotify object and returns the AI winner data.
     """
+
     try:
         # Fetch 20 recently played + liked songs using the authenticated client
         all_tracks = spoti.fetch_all_user_tracks(sp, max_liked=100, recently_played_limit=20)

@@ -4,10 +4,9 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from spotipy.cache_handler import FlaskSessionCacheHandler
 from python.connect import run_spotify_ai # Import your updated function
-import python.lyrics
-import python.spoti
-import python.ai
-
+# import python.lyrics
+# import python.spoti
+# import python.ai
 
 app = Flask(__name__)
 
@@ -30,43 +29,53 @@ def create_spotify_oauth():
 def home():
     return render_template("index.html")
 
+# Landing page before logging in
 @app.route("/connect")
 def connect():
-    cache_handler = FlaskSessionCacheHandler(session)
-    auth_manager = create_spotify_oauth()
-    
-    if not auth_manager.validate_token(cache_handler.get_cached_token()):
-        return redirect(url_for('login'))
-        
     return render_template("connect.html")
 
+# Redirect to Spotify
 @app.route("/login")
 def login():
     auth_manager = create_spotify_oauth()
     auth_url = auth_manager.get_authorize_url()
     return redirect(auth_url)
 
+# Page after log in
 @app.route("/callback")
 def callback():
     auth_manager = create_spotify_oauth()
-    auth_manager.get_access_token(request.args.get("code"))
-    return redirect(url_for("connect"))
+    code = request.args.get("code")
+    if code:
+        auth_manager.get_access_token(code)
+    # Redirect straight to the thinking page
+    return redirect(url_for("thinking"))
 
-@app.route("/api/run_ai")
-def api_run_ai():
-    # This is the endpoint the frontend will call behind the scenes
+# The thinking page that runs the AI computation
+@app.route("/thinking")
+def thinking():
     cache_handler = FlaskSessionCacheHandler(session)
     auth_manager = create_spotify_oauth()
     
     if not auth_manager.validate_token(cache_handler.get_cached_token()):
-        return jsonify({"status": "error", "message": "Not logged in"}), 401
+        return redirect(url_for('connect'))
+        
+    # Check if we should execute the AI run
+    if request.args.get("run") == "true":
+        sp = spotipy.Spotify(auth_manager=auth_manager)
+        # Run your python script
+        ai_data = run_spotify_ai(sp)
+        # Store result in session to pass to the final result page
+        session['ai_result'] = ai_data
+        return redirect(url_for("result"))
 
-    # Create the authenticated Spotify client
-    sp = spotipy.Spotify(auth_manager=auth_manager)
-    
-    # Run your AI logic
-    result = run_spotify_ai(sp)
-    return jsonify(result)
+    return render_template("thinking.html")
+
+# Final page showing the output
+@app.route("/result")
+def result():
+    ai_data = session.get('ai_result', {})
+    return render_template("result.html", data=ai_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

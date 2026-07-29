@@ -1,65 +1,18 @@
-{% extends "base.html" %}
+{% extends "layout.html" %}
 
-{% block title %}Connect - My Website{% endblock %}
+{% block title %}DitchSpotify - Connect {% endblock %}
 
 {% block content %}
-<div class="content-body" style="text-align: center; margin-top: 5rem;">
+<div class="content-body" style="text-align: center; margin-top: 3rem;">
+    <h1 class="page-title">Connect Spotify</h1>
+    <div class="page-subscript">Let AI analyze your music</div>
     
-    <!-- Initial Button -->
-    <div id="start-section">
-        <h2>Ready to analyze your music?</h2>
-        <button id="start-btn" class="hero-btn" onclick="runAI()">Start Analysis</button>
-    </div>
+    <p style="margin: 2rem 0;">
+        Click the button below to log in with Spotify and let our AI analyze your recent listening history.
+    </p>
 
-    <!-- Thinking State (Hidden by default) -->
-    <div id="loading-section" style="display: none;">
-        <h2>The AI is thinking...</h2>
-        <p>Analyzing lyrics and crowning the winner.</p>
-        <!-- You can add a CSS spinner here if you want! -->
-    </div>
-
-    <!-- Results State (Hidden by default) -->
-    <div id="results-section" style="display: none; text-align: left; max-width: 600px; margin: 0 auto; background: #331d42; padding: 2rem; border-radius: 8px;">
-        <h2 style="color: #ffffff;">🏆 WINNER: <span id="res-song"></span></h2>
-        <p><strong>📌 THEME:</strong> <span id="res-theme"></span></p>
-        <p><strong>💬 KEY LYRICS:</strong> "<span id="res-quote"></span>"</p>
-        <p><strong>📖 WHY IT WON:</strong><br><span id="res-explanation"></span></p>
-    </div>
-
+    <a href="{{ url_for('login') }}" class="hero-btn" style="display: inline-block;">
+        Log in with Spotify
+    </a>
 </div>
-
-<!-- JavaScript to handle the background processing -->
-<script>
-    async function runAI() {
-        // 1. Hide start button, show loading
-        document.getElementById('start-section').style.display = 'none';
-        document.getElementById('loading-section').style.display = 'block';
-
-        try {
-            // 2. Call the Flask backend
-            const response = await fetch('/api/run_ai');
-            const data = await response.json();
-
-            // 3. Hide loading
-            document.getElementById('loading-section').style.display = 'none';
-
-            if (data.status === 'success') {
-                // 4. Populate and show results
-                document.getElementById('res-song').innerText = data.winning_song;
-                document.getElementById('res-theme').innerText = data.theme;
-                document.getElementById('res-quote').innerText = data.key_quote;
-                document.getElementById('res-explanation').innerText = data.explanation;
-                
-                document.getElementById('results-section').style.display = 'block';
-            } else {
-                alert("Error: " + data.message);
-                document.getElementById('start-section').style.display = 'block';
-            }
-        } catch (error) {
-            alert("A network error occurred.");
-            document.getElementById('start-section').style.display = 'block';
-            document.getElementById('loading-section').style.display = 'none';
-        }
-    }
-</script>
 {% endblock %}
