@@ -7,10 +7,14 @@
 
     {% if data.status == 'success' %}
         <div style="background: #331d42; padding: 2rem; border-radius: 8px;">
-            <h1 class="page-title" style="margin-bottom: 1rem;">🏆 WINNER: {{ data.winning_song }}</h1>
-            <p style="margin-bottom: 1rem;"><strong>📌 THEME:</strong> {{ data.theme }}</p>
-            <p style="margin-bottom: 1rem;"><strong>💬 KEY LYRICS:</strong> "{{ data.key_quote }}"</p>
-            <p><strong>📖 WHY IT WON:</strong><br>{{ data.explanation }}</p>
+            <h1 class="page-title" style="margin-bottom: 1rem;">Je hebt recentelijk geluisterd naar {{ data.winning_song }}</h1>
+            <!-- <p style="margin-bottom: 1rem;"><strong>📌 THEME:</strong> {{ data.theme }}</p> -->
+            <!-- <p style="margin-bottom: 1rem;"><strong>💬 KEY LYRICS:</strong> "{{ data.key_quote }}"</p> -->
+            <p>{{ data.explanation }}</p>
+            {% if winner.theme.lower() == "anti-war": %}
+                <p>De betekenis van dit nummer staat haaks op de investeringen van Spotify's voorzitter</p>
+            {% elif winner.theme.lower() == "climate change warning": %}
+                <p>De betekenis van dit nummer staat haaks op de technologie die Spotify gebruikt</p>
         </div>
     {% else %}
         <h1 class="page-title">An Error Occurred</h1>
